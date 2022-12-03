@@ -8,15 +8,14 @@ import Box from '@mui/material/Box';
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar"
+import FlightInDetailCard from "./FlightInDetailCard";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import { alignProperty } from "@mui/material/styles/cssUtils";
-import FlightInDetailCard from "./FlightInDetailCard";
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 
-
-class Arrival extends React.Component {
+class Departure extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -38,7 +37,7 @@ class Arrival extends React.Component {
                 isLoaded: true,
                 screen: this.props.screen,
                 terminal: "T1",
-                hours: "1",
+                hours: "1"
             })
         });
     }
@@ -95,15 +94,15 @@ class Arrival extends React.Component {
 
     handleHourChange(timeSlot) {
         this.setState({hours: timeSlot.target.value})
+        // alert(timeSlot);
     }
 
     getItemsAfterFilter(screen, items) {
         if (screen === "dashboard") return (
-            items.filter(item => item.arrival_departure === "arrival").slice(0, 5)
+            items.filter(item => item.arrival_departure === "departure").slice(0, 5)
         );
-        
         else  return (
-            items.filter(item => item.arrival_departure === "arrival")
+            items.filter(item => item.arrival_departure === "departure")
         );
     }
     
@@ -116,4 +115,4 @@ class Arrival extends React.Component {
     }
 }
 
-export default Arrival;
+export default Departure;

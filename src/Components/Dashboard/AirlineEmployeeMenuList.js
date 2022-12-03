@@ -9,8 +9,9 @@ import FlightLandOutlinedIcon from '@mui/icons-material/FlightLandOutlined';
 import FlightTakeoffOutlinedIcon from '@mui/icons-material/FlightTakeoffOutlined';
 import CelebrationOutlinedIcon from '@mui/icons-material/CelebrationOutlined';
 import LoginIcon from '@mui/icons-material/Login';
+import AirplaneTicketIcon from '@mui/icons-material/AirplaneTicket';
 
-export default function MainListItems({selected, setSelected}) {
+export default function AirlineEmployeeListItems({selected, setSelected}) {
   return (
     <React.Fragment>
       <ListItemButton onClick={(e) => setSelected("dashboard")} selected={selected == "dashboard"}>
@@ -19,7 +20,7 @@ export default function MainListItems({selected, setSelected}) {
         </ListItemIcon>
         <ListItemText primary="Dashboard" />
       </ListItemButton>
-      <ListItemButton onClick={(e) => setSelected("arrivals")} selected={selected == "arrivals"}>
+      <ListItemButton onClick={(e) => setSelected("arrivals")} selected={selected == "arrival"}>
         <ListItemIcon>
           <FlightLandOutlinedIcon sx={{ color: 'green' }}/>
         </ListItemIcon>
@@ -31,11 +32,17 @@ export default function MainListItems({selected, setSelected}) {
         </ListItemIcon>
         <ListItemText primary="Departures" />
       </ListItemButton>
-      <ListItemButton onClick={(e) => setSelected("login")} selected={selected == "login"}>
+      {/* <ListItemButton onClick={(e) => setSelected("login")} selected={selected == "login"}>
         <ListItemIcon>
           <LoginIcon sx={{ color: 'purple' }} />
         </ListItemIcon>
         <ListItemText primary="Log In" />
+      </ListItemButton> */}
+      <ListItemButton onClick={(e) => setSelected("airlineManagement")} selected={selected == "airlineManagement"}>
+        <ListItemIcon>
+          <AirplaneTicketIcon sx={{ color: 'purple' }} />
+        </ListItemIcon>
+        <ListItemText primary="Airline Management" />
       </ListItemButton>
       <ListItemButton onClick={(e) => setSelected("aboutus")} selected={selected == "aboutus"}>
         <ListItemIcon>

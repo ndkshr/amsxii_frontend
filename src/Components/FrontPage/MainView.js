@@ -3,7 +3,7 @@ import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Orders from '../Dashboard/Orders';
+import DashboardFlightScheduleCard from '../Dashboard/DashboardFlightScheduleCard';
 
 
 export default function MainView() {
@@ -13,13 +13,13 @@ export default function MainView() {
               {/* Arrivals Quick View */}
               <Grid item xs={12} sm={6} md={6}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders heading="Arrivals"/>
+                  <DashboardFlightScheduleCard heading="Arrivals"/>
                 </Paper>
               </Grid>
               {/* Departures Quick View */}
               <Grid item xs={12} sm={6} md={6}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders heading="Departures"/>
+                  <DashboardFlightScheduleCard heading="Departures"/>
                 </Paper>
               </Grid>
             </Grid>

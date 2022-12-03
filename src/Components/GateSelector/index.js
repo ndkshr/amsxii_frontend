@@ -5,19 +5,23 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import { experimentalStyled as styled } from "@mui/material/styles";
+import BlockIcon from '@mui/icons-material/Block';
+import SingleGateBlock from "./SingleGateBlock";
+import { Typography } from "@mui/material";
 
 const Item = styled("div")(({ active, theme }) => ({
-  ...theme.typography.body2,
+  height: 100,
+  width: 100,
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   backgroundColor: active ? "green" : "#fff",
-  padding: theme.spacing(2),
+  margin: 8,
   textAlign: "center",
-  color: theme.palette.text.secondary,
-  border: "1px solid black",
-  cursor: "pointer",
-  "&:hover": {
+  color: active ? "white" : theme.palette.text.secondary,
+  borderRadius: 25,
+  cursor: "pointer", "&:hover": {
+    color: "white",
     backgroundColor: "green",
   },
 }));
@@ -47,29 +51,30 @@ const GateSelector = () => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          marginTop: "16px",
           marginBottom: "16px",
         }}
       >
         <Button
           variant="contained"
-          size="small"
+          size="large"
           onClick={() => setActiveTerminal("T1")}
         >
-          T1
+          Terminal 1
         </Button>
         <Button
           variant="contained"
-          size="small"
+          size="large"
           onClick={() => setActiveTerminal("T2")}
         >
-          T2
+          Terminal 2
         </Button>
         <Button
           variant="contained"
-          size="small"
+          size="large"
           onClick={() => setActiveTerminal("T3")}
         >
-          T3
+          Terminal 3
         </Button>
       </Container>
     );
@@ -77,15 +82,19 @@ const GateSelector = () => {
 
   const renderGateGrid = () => {
     return (
-      <Grid container columns={{ xs: 8, sm: 8, md: 8 }}>
+      <Grid container columns={{ xs: 8, sm: 8, md: 8 }} sx={{p: 2}}>
         {Array.from(Array(32)).map((_, index) => (
           <Grid item xs={1} sm={1} md={1} key={index}>
             <Item
               active={selectedGate === index}
               onClick={() => onSelectGate(index)}
             >
-              {index + 1}
+              <Typography variant="h5">{index + 1}</Typography>
             </Item>
+            {/* <SingleGateBlock active={selectedGate === index}
+            onClick={() => onSelectGate(index)} gateCode="A1">
+
+            </SingleGateBlock> */}
           </Grid>
         ))}
       </Grid>
@@ -94,8 +103,14 @@ const GateSelector = () => {
 
   const renderActionBtns = () => {
     return (
-      <Container maxWidth="sm" sx={{ marginTop: "16px" }}>
-        <Button variant="contained" size="small" onClick={onBlockGate}>
+      <Container maxWidth="xs" sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: "16px",
+        marginBottom: "16px",
+      }} columns={{xs: 12, sm: 12, md: 12}}>
+        <Button variant="contained" color="error" size="large" onClick={onBlockGate} startIcon={<BlockIcon />}>
           Block
         </Button>
       </Container>

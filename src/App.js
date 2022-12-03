@@ -10,8 +10,8 @@ function App() {
     <div>
       {/* <Arrival></Arrival> */}
       {/* <Login></Login> */}
-      {/* <Dashboard></Dashboard> */}
-      <GateSelector />
+      <Dashboard></Dashboard>
+      {/* <GateSelector /> */}
     </div>
   );
 }

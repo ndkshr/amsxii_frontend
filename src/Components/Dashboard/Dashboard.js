@@ -14,9 +14,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MainListItems from './listItems';
+import AirlineEmployeeListItems from './AirlineEmployeeMenuList';
+import AirportEmployeeListItems from './AirPortEmployeeMenuList';
 import MainView from '../FrontPage/MainView';
 import Arrival from '../FlightSchedule/Arrival';
+import Departure from '../FlightSchedule/Departure';
 import Login from '../Login/Login';
+import GateManagement from '../GateSelector';
+import AirlineManagementPage from '../AirlineManagement/AirlineManagementPage';
 
 const drawerWidth = 240;
 
@@ -78,13 +83,17 @@ function DashboardContent() {
   if (selectedMenuItem == "dashboard") {
     content = <MainView />
   } else if (selectedMenuItem == "arrivals") {
-    content = <Arrival />
+    content = <Arrival screen="arrival"/>
   } else if (selectedMenuItem == "departures") {
-    content = <Arrival />
+    content = <Departure />
   } else if (selectedMenuItem == "login") {
     content = <Login />
   } else if (selectedMenuItem == "aboutus") {
     content = <>ABOUT US</>
+  }  else if (selectedMenuItem == "airlineManagement") {
+    content = <AirlineManagementPage />
+  }  else if (selectedMenuItem == "gateManagement") {
+    content = <GateManagement />
   } else {
     content = <>DEFAULT CONTENT</>
   }
@@ -142,7 +151,9 @@ function DashboardContent() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            <MainListItems selected={selectedMenuItem} setSelected={setSelectedMenuItem} />
+            {/* <MainListItems selected={selectedMenuItem} setSelected={setSelectedMenuItem} /> */}
+            <AirlineEmployeeListItems selected={selectedMenuItem} setSelected={setSelectedMenuItem} />
+            <AirportEmployeeListItems selected={selectedMenuItem} setSelected={setSelectedMenuItem} />
             <Divider sx={{ my: 1 }} />
           </List>
         </Drawer>

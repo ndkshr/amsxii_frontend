@@ -9,61 +9,33 @@ import { Stack, Typography } from "@mui/material";
 import Button from '@mui/material/Button';
 import Title from './Title';
 import Arrival from '../FlightSchedule/Arrival';
-
-// Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
-}
-
-const rows = [
-  createData(
-    0,
-    '16 Mar, 2019',
-    'Elvis Presley',
-    'Tupelo, MS',
-    'VISA ⠀•••• 3719',
-    312.44,
-  ),
-  createData(
-    1,
-    '16 Mar, 2019',
-    'Paul McCartney',
-    'London, UK',
-    'VISA ⠀•••• 2574',
-    866.99,
-  ),
-  createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
-  createData(
-    3,
-    '16 Mar, 2019',
-    'Michael Jackson',
-    'Gary, IN',
-    'AMEX ⠀•••• 2000',
-    654.39,
-  ),
-  createData(
-    4,
-    '15 Mar, 2019',
-    'Bruce Springsteen',
-    'Long Branch, NJ',
-    'VISA ⠀•••• 5919',
-    212.79,
-  ),
-];
+import Departure from '../FlightSchedule/Departure';
 
 function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function Orders({ heading }) {
+export default function DashboardFlightScheduleCard({ heading }) {
   return (
     <React.Fragment>
       {/* <Title>{ heading }</Title> */}
       <Typography variant="h4" color="primary.main">{heading}</Typography>
-      <Arrival />
+      {getArrivalDepartureView(heading)}
       <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 1 }}>
         <Button variant="contained"> View All </Button>
       </Link>
     </React.Fragment>
   );
+}
+
+const getArrivalDepartureView = (heading) => {
+  if (heading === "Departures") {
+    return (
+      <Departure screen="dashboard" />
+    )
+  } else if (heading === "Arrivals") {
+    return (
+      <Arrival screen="dashboard" />
+    )
+  }
 }

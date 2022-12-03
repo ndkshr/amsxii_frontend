@@ -8,16 +8,33 @@ import { CardActionArea } from '@mui/material';
 import ArrowForwardSharpIcon from '@mui/icons-material/ArrowForwardSharp';
 import EventIcon from '@mui/icons-material/Event';
 
+// Quick View
 export default function FlightCard({ flight }) {
   return (
     <div>
-      <Box display="flex" alignItems="center">
-        <Card sx= {{ width: 1, p: 1, display: 'flex', flexDirection: 'row' , alignItems: 'center'}}>
-          <Box sx={{ display: 'flex', flexDirection: 'column'}}>
-            <Typography variant="h6">
-            {flight.source} <ArrowForwardSharpIcon sx={{ fontSize: 15 }} /> {flight.destination}
-            </Typography>
-            <Typography variant="subtitle1"><EventIcon sx={{ fontSize: 13 }} />  {flight.time} / {flight.date}</Typography>  
+      <Box sx={{felxGrow: 1}}>
+        <Card sx= {{ width: 1, p: 1, display: 'flex', flexDirection: 'row' , alignItems: 'center', justifyContent: "center"}}>
+          <Box sx={{ display: "flex", flexDirection: "row" , alignItems: "center"}}>
+
+            <Typography variant="subtitle1" sx={{mr: 4}} >{flight.airline_flight_key}</Typography>
+            
+            <Box sx={{ mr: 4, display: 'flex', flexDirection: 'column', alignItems: "center"}}>
+              <Typography variant="h5">SJC</Typography>
+              <Typography variant="body2">({flight.source})</Typography>  
+            </Box>
+
+            <ArrowForwardSharpIcon sx={{ fontSize: 30 }} />
+
+            <Box sx={{ ml: 4, display: 'flex', flexDirection: 'column', alignItems: "center"}}>
+              <Typography variant="h5">DAL</Typography>
+              <Typography variant="body2">({flight.destination})</Typography>  
+            </Box>
+
+            <Box sx={{ ml: 4, display: 'flex', flexDirection: 'column', alignItems: "center"}}>
+              <Typography variant="body1" sx={{ fontSize:12 }}>{flight.time}</Typography>
+              <Typography variant="body1" sx={{ fontSize:12 }}>({flight.date})</Typography>  
+            </Box>
+
           </Box>
         </Card>
       </Box>

@@ -11,4 +11,15 @@ export const AMS_API = SCHEME + DOMAIN + PORT + API_PATH;
 // API Endpoint URLs path suffix
 export const FLIGHT_SCHEDULE_LIST_API = AMS_API + "/flight-schedule-list";
 
+export const MENU_ITEMS = {
+    arrival : "ARRIVAL", 
+    departure: "DEPARTURE", 
+    dashboard: "DASHBOARD", 
+    airlineManagement: "AIRLINE_MANAGEMENT",
+    airportManagement: "AIRPORT_MANAGMENT",
+    login: "LOGIN",
+    logout: "LOGOUT",
+    
+}
+
 
