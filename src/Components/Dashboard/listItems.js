@@ -4,69 +4,47 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import PeopleIcon from '@mui/icons-material/People';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import FlightLandOutlinedIcon from '@mui/icons-material/FlightLandOutlined';
+import FlightTakeoffOutlinedIcon from '@mui/icons-material/FlightTakeoffOutlined';
+import CelebrationOutlinedIcon from '@mui/icons-material/CelebrationOutlined';
+import LoginIcon from '@mui/icons-material/Login';
+import Button from "@mui/material/Button";
+import Avatar from "@mui/material/Avatar";
 
-export const mainListItems = (
-  <React.Fragment>
-    <ListItemButton>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Dashboard" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Orders" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Customers" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Reports" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Integrations" />
-    </ListItemButton>
-  </React.Fragment>
-);
-
-export const secondaryListItems = (
-  <React.Fragment>
-    <ListSubheader component="div" inset>
-      Saved reports
-    </ListSubheader>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Current month" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Last quarter" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Year-end sale" />
-    </ListItemButton>
-  </React.Fragment>
-);
+export default function MainListItems({selected, setSelected}) {
+  return (
+    <React.Fragment>
+      <ListItemButton onClick={(e) => setSelected("dashboard")} selected={selected == "dashboard"}>
+        <ListItemIcon>
+          <DashboardIcon sx={{ color: 'primary.main' }}/>
+        </ListItemIcon>
+        <ListItemText primary="Dashboard" />
+      </ListItemButton>
+      <ListItemButton onClick={(e) => setSelected("arrivals")} selected={selected == "arrival"}>
+        <ListItemIcon>
+          <FlightLandOutlinedIcon sx={{ color: 'green' }}/>
+        </ListItemIcon>
+        <ListItemText primary="Arrivals" />
+      </ListItemButton>
+      <ListItemButton onClick={(e) => setSelected("departures")} selected={selected == "departures"}>
+        <ListItemIcon>
+          <FlightTakeoffOutlinedIcon sx={{ color: 'red' }}/>
+        </ListItemIcon>
+        <ListItemText primary="Departures" />
+      </ListItemButton>
+      <ListItemButton onClick={(e) => setSelected("login")} selected={selected == "login"}>
+        <ListItemIcon>
+          <LoginIcon sx={{ color: 'purple' }} />
+        </ListItemIcon>
+        <ListItemText primary="Log In" />
+      </ListItemButton>
+      <ListItemButton onClick={(e) => setSelected("aboutus")} selected={selected == "aboutus"}>
+        <ListItemIcon>
+          <CelebrationOutlinedIcon sx={{ color: 'orange' }} />
+        </ListItemIcon>
+        <ListItemText primary="About Us" />
+      </ListItemButton>
+    </React.Fragment>
+  );
+}

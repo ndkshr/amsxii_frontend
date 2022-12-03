@@ -77,7 +77,7 @@ const GateSelector = () => {
 
   const renderGateGrid = () => {
     return (
-      <Grid container columns={{ xs: 8, sm: 8, md: 12 }}>
+      <Grid container columns={{ xs: 8, sm: 8, md: 8 }}>
         {Array.from(Array(32)).map((_, index) => (
           <Grid item xs={1} sm={1} md={1} key={index}>
             <Item

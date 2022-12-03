@@ -1,12 +1,14 @@
 import * as React from "react";
 import { experimentalStyled as styled } from '@mui/material/styles';
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import {FLIGHT_SCHEDULE_LIST_API as API} from '../../RestAPI/Constants';
 import LinearProgress from '@mui/material/LinearProgress';
 import FlightCard from "./FlightCard";
 import Box from '@mui/material/Box';
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
+import Avatar from "@mui/material/Avatar"
+import { alignProperty } from "@mui/material/styles/cssUtils";
 
 class Arrival extends React.Component {
     constructor(props) {
@@ -18,6 +20,7 @@ class Arrival extends React.Component {
     }
 
     componentDidMount() {
+        var debugurl = "https://60261217186b4a001777fbd7.mockapi.io/api/ndkshr/flight-schedule-list"
         fetch(API)
         .then(res => res.json())
         .then(json => {
@@ -30,45 +33,7 @@ class Arrival extends React.Component {
 
     render() {
         var { items, isLoaded } = this.state;
-        var flightData = [
-            {
-                "fact_guid": "AAL_AA2401_2022_12_01",
-                "airline_flight_key": "AAL_AA2401",
-                "source": "San Jose",
-                "destination": "Dallas",
-                "arrival_departure": "departure",
-                "date": "2022-12-01",
-                "time": "14:30:00",
-                "terminal_gate_key": null,
-                "baggage_carousel": "A1_B1",
-                "remarks": "scheduled"
-            },
-            {
-                "fact_guid": "AAL_AA2401_2022_12_03",
-                "airline_flight_key": "AAL_AA2401",
-                "source": "San Jose",
-                "destination": "Dallas",
-                "arrival_departure": "departure",
-                "date": "2022-12-03",
-                "time": "14:30:00",
-                "terminal_gate_key": null,
-                "baggage_carousel": "A1_B1",
-                "remarks": "scheduled"
-            },
-            {
-                "fact_guid": "AAL_AA2402_2022_12_02",
-                "airline_flight_key": "AAL_AA2402",
-                "source": "San Jose",
-                "destination": "Dallas",
-                "arrival_departure": "departure",
-                "date": "2022-12-02",
-                "time": "14:45:00",
-                "terminal_gate_key": null,
-                "baggage_carousel": "A1_B1",
-                "remarks": "scheduled"
-            }
-        ];
-
+    
         if (!isLoaded) {
             return (
                 <LinearProgress color="secondary" />
@@ -76,19 +41,25 @@ class Arrival extends React.Component {
         } else {
             return (
                 <div>
-                    <Grid container spacing={2} sx={{p: 2}}>
-                        <Grid item xs>
-                            <Button variant="contained">Terminal 1</Button>
+                    <Grid container spacing={1} sx={{p: 2}}>
+                        <Grid item>
+                            <Avatar sx={{ bgcolor: "primary.main", alignProperty: "center"}}> 
+                                <Typography variant="button">T1</Typography>
+                            </Avatar>
                         </Grid>
-                        <Grid item xs>
-                            <Button variant="outlined">Terminal 2</Button>
+                        <Grid item>
+                            <Avatar sx={{ bgcolor: "primary.main", alignProperty: "center"}}> 
+                                <Typography variant="button">T2</Typography>
+                            </Avatar>
                         </Grid>
-                        <Grid item xs>
-                            <Button variant="outlined">Terminal 3</Button>
+                        <Grid item>
+                            <Avatar sx={{ bgcolor: "primary.main", alignProperty: "center"}}> 
+                                <Typography variant="button">T3</Typography>
+                            </Avatar>
                         </Grid>
                     </Grid>
                     <Stack sx={{p: 2}} spacing={2}>
-                        {items.map(item => (
+                        {items.slice(0, 5).map((item, idx) => (
                             <FlightCard flight={item}/>
                         ))}
                     </Stack>

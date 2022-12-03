@@ -10,29 +10,13 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
+import MainListItems from './listItems';
 import MainView from '../FrontPage/MainView';
-import Orders from './Orders';
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import Arrival from '../FlightSchedule/Arrival';
+import Login from '../Login/Login';
 
 const drawerWidth = 240;
 
@@ -88,6 +72,23 @@ function DashboardContent() {
     setOpen(!open);
   };
 
+  const [selectedMenuItem, setSelectedMenuItem] = React.useState("dashboard")
+
+  let content;
+  if (selectedMenuItem == "dashboard") {
+    content = <MainView />
+  } else if (selectedMenuItem == "arrivals") {
+    content = <Arrival />
+  } else if (selectedMenuItem == "departures") {
+    content = <Arrival />
+  } else if (selectedMenuItem == "login") {
+    content = <Login />
+  } else if (selectedMenuItem == "aboutus") {
+    content = <>ABOUT US</>
+  } else {
+    content = <>DEFAULT CONTENT</>
+  }
+
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -141,9 +142,8 @@ function DashboardContent() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItems}
+            <MainListItems selected={selectedMenuItem} setSelected={setSelectedMenuItem} />
             <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
           </List>
         </Drawer>
         <Box
@@ -159,7 +159,8 @@ function DashboardContent() {
           }}
         >
           <Toolbar />
-          <MainView />
+          {/* <>Content goes here</> */}
+          {content}
         </Box>
       </Box>
     </ThemeProvider>
