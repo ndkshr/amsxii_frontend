@@ -81,21 +81,22 @@ function DashboardContent() {
 
   let content;
   if (selectedMenuItem == "dashboard") {
-    content = <MainView />
-  } else if (selectedMenuItem == "arrivals") {
+    content = <MainView selected={selectedMenuItem} setSelected={setSelectedMenuItem}/>
+  } else if (selectedMenuItem === "arrivals") {
     content = <Arrival screen="arrival"/>
-  } else if (selectedMenuItem == "departures") {
-    content = <Departure />
-  } else if (selectedMenuItem == "login") {
+  } else if (selectedMenuItem === "departures") {
+    content = <Departure screen="departures"/>
+  } else if (selectedMenuItem === "login") {
     content = <Login />
-  } else if (selectedMenuItem == "aboutus") {
+  } else if (selectedMenuItem === "aboutus") {
     content = <>ABOUT US</>
-  }  else if (selectedMenuItem == "airlineManagement") {
+  }  else if (selectedMenuItem === "airlineManagement") {
     content = <AirlineManagementPage />
-  }  else if (selectedMenuItem == "gateManagement") {
+  }  else if (selectedMenuItem === "gateManagement") {
     content = <GateManagement />
-  } else {
-    content = <>DEFAULT CONTENT</>
+  } else if (selectedMenuItem === "logout"){
+    window.sessionStorage.clear();
+    window.location.reload();
   }
 
   return (
@@ -151,9 +152,7 @@ function DashboardContent() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            {/* <MainListItems selected={selectedMenuItem} setSelected={setSelectedMenuItem} /> */}
-            <AirlineEmployeeListItems selected={selectedMenuItem} setSelected={setSelectedMenuItem} />
-            <AirportEmployeeListItems selected={selectedMenuItem} setSelected={setSelectedMenuItem} />
+            {setMenuForUser(selectedMenuItem, setSelectedMenuItem)}
             <Divider sx={{ my: 1 }} />
           </List>
         </Drawer>
@@ -176,6 +175,23 @@ function DashboardContent() {
       </Box>
     </ThemeProvider>
   );
+}
+
+const setMenuForUser = (selectedMenuItem, setSelectedMenuItem) => {
+  let user_role = window.sessionStorage.getItem("user_role");
+  if (user_role === "airline_employee") {
+    return (
+      <AirlineEmployeeListItems selected={selectedMenuItem} setSelected={setSelectedMenuItem} />
+    )
+  } else if (user_role === "airport_employee") {
+    return (
+      <AirportEmployeeListItems selected={selectedMenuItem} setSelected={setSelectedMenuItem} />
+    )
+  } else {
+    return (
+      <MainListItems selected={selectedMenuItem} setSelected={setSelectedMenuItem} />
+    )
+  }
 }
 
 export default function Dashboard() {

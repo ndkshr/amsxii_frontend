@@ -10,6 +10,7 @@ import FlightTakeoffOutlinedIcon from '@mui/icons-material/FlightTakeoffOutlined
 import CelebrationOutlinedIcon from '@mui/icons-material/CelebrationOutlined';
 import LoginIcon from '@mui/icons-material/Login';
 import AirplaneTicketIcon from '@mui/icons-material/AirplaneTicket';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export default function AirlineEmployeeListItems({selected, setSelected}) {
   return (
@@ -49,6 +50,12 @@ export default function AirlineEmployeeListItems({selected, setSelected}) {
           <CelebrationOutlinedIcon sx={{ color: 'orange' }} />
         </ListItemIcon>
         <ListItemText primary="About Us" />
+      </ListItemButton>
+      <ListItemButton onClick={(e) => setSelected("logout")} selected={selected == "logout"}>
+        <ListItemIcon>
+          <LogoutIcon sx={{ color: 'grey' }} />
+        </ListItemIcon>
+        <ListItemText primary="Log Out" />
       </ListItemButton>
     </React.Fragment>
   );

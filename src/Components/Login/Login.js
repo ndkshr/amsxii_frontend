@@ -10,8 +10,40 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { SettingsInputAntenna, SettingsInputAntennaTwoTone } from '@mui/icons-material';
+import {LOGIN_REQUEST_API as API} from "../../RestAPI/Constants";
 
 const theme = createTheme();
+
+const storeAuthData = (authData) => {
+  window.sessionStorage.setItem("refresh_token", authData.token.refresh);
+  window.sessionStorage.setItem("access_token", authData.token.access);
+  window.sessionStorage.setItem("user_role", authData.user_role);
+  window.location.reload();
+}
+
+const sendLoginRequest = (email, password) => {
+  let requestUrl = API;
+  fetch(requestUrl,  {
+    method: "POST",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      "email": email,
+      "password": password
+    })
+  })
+  .then(response => response.json())
+  .then(json => {
+    if (json.msg === "login successful") {
+    
+      storeAuthData(json);
+    }
+  });
+} 
+
 
 export default function Login() {
   const handleSubmit = (event) => {
@@ -21,6 +53,7 @@ export default function Login() {
       email: data.get('email'),
       password: data.get('password'),
     });
+    sendLoginRequest(data.get('email'), data.get('password'));
   };
 
   return (

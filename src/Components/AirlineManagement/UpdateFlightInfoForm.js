@@ -5,20 +5,22 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
-export default function AddUpdateFlightInfoForm() {
+export default function UpdateFlightInfoForm({ addNew }) {
+  console.log(addNew, "new elements")
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Shipping address
       </Typography>
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12}>
           <TextField
             required
-            id="firstName"
-            name="firstName"
-            label="First name"
+            id="airline_flight_key"
+            name="airline_flight_key"
+            label="Airline_flight_key"
             fullWidth
+            disabled={true}
             autoComplete="given-name"
             variant="standard"
           />
@@ -26,20 +28,20 @@ export default function AddUpdateFlightInfoForm() {
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="lastName"
-            name="lastName"
-            label="Last name"
+            id="source"
+            name="source"
+            label="Source"
             fullWidth
             autoComplete="family-name"
             variant="standard"
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="address1"
-            name="address1"
-            label="Address line 1"
+            id="destination"
+            name="destination"
+            label="Destination"
             fullWidth
             autoComplete="shipping address-line1"
             variant="standard"

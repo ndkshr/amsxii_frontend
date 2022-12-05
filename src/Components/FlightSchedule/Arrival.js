@@ -28,9 +28,30 @@ class Arrival extends React.Component {
         }
     }
 
-    componentDidMount() {
-        var debugurl = "https://60261217186b4a001777fbd7.mockapi.io/api/ndkshr/flight-schedule-list"
-        fetch(API)
+    componentDidMount(timeSlot = "1") {
+        this.hitFlightScheduleAPI(timeSlot);
+    }
+
+    hitFlightScheduleAPI(timeSlot = "1") {
+        console.log(timeSlot)
+        var date = new Date();
+        var timeGTE = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        var timeLTE = (date.getHours() + Number(timeSlot)) + ":" + date.getMinutes() + ":" + date.getSeconds();
+        var dateGTE = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+        var dateLTE = dateGTE;
+
+        var queryParams = {
+            "time__gte": timeGTE,
+            "time__lte": timeLTE,
+            "date__gte": dateGTE,
+            "date__lte": dateLTE
+        }
+        var url = new URL(API);
+        Object.keys(queryParams).forEach(key => url.searchParams.append(key, queryParams[key]));
+
+        var debugurl = "https://60261217186b4a001777fbd7.mockapi.io/api/ndkshr/flight-schedule-list";
+
+        fetch(url)
         .then(res => res.json())
         .then(json => {
             this.setState({
@@ -38,7 +59,7 @@ class Arrival extends React.Component {
                 isLoaded: true,
                 screen: this.props.screen,
                 terminal: "T1",
-                hours: "1",
+                hours: timeSlot,
             })
         });
     }
@@ -53,7 +74,7 @@ class Arrival extends React.Component {
         } else {
             return (
                 <div>
-                    <Grid>
+                    <Grid sx={{justifyContent: "center", display: "flex"}}>
                         <FormControl sx={{m: 2, minWidth: 120}}>
                             <InputLabel id="select-terminal">Terminal</InputLabel>
                             <Select
@@ -93,17 +114,19 @@ class Arrival extends React.Component {
         this.setState({terminal: terminal.target.value})
     }
 
-    handleHourChange(timeSlot) {
-        this.setState({hours: timeSlot.target.value})
+    handleHourChange(timeSlotEvent) {
+        this.setState({hours: timeSlotEvent.target.value})
+        this.componentDidMount(timeSlotEvent.target.value);
     }
 
     getItemsAfterFilter(screen, items) {
+        let currentTerminal = this.props.terminal;
         if (screen === "dashboard") return (
-            items.filter(item => item.arrival_departure === "arrival").slice(0, 5)
+            items.filter(item => item.arrival_departure === "arrival" && null !== item.terminal_gate_key && item.terminal_gate_key.includes(currentTerminal)).slice(0, 5)
         );
         
         else  return (
-            items.filter(item => item.arrival_departure === "arrival")
+            items.filter(item => item.arrival_departure === "arrival" && null !== item.terminal_gate_key && item.terminal_gate_key.includes(currentTerminal))
         );
     }
     

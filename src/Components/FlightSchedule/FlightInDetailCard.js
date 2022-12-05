@@ -13,15 +13,15 @@ import EventIcon from '@mui/icons-material/Event';
 const getBaggageOrRemarks = (flight) => {
   if (flight.arrival_departure === "departure") {
     return (
-      <Button variant="round" sx={{ bgcolor: "blue", alignProperty: "center", color: "white", ml: 2, mr: 2, display: "flex", flexDirection: "column"}}> 
-          <Typography variant="overline" sx={{fontSize: 8, color: "gold"}}>Remark</Typography>
+      <Button variant="contained"  sx={{ alignProperty: "center", ml: 2, mr: 2, display: "flex", flexDirection: "column"}}> 
+          <Typography variant="overline" sx={{fontSize: 8}}>Remark</Typography>
           <Typography variant="h5" sx={{fontSize: 16}}>{flight.remarks}</Typography>
       </Button>
     )
   } else if (flight.arrival_departure === "arrival") {
     return (
-      <Button variant="round" sx={{ bgcolor: "blue", alignProperty: "center", color: "white", ml: 2, mr: 2, display: "flex", flexDirection: "column"}}> 
-        <Typography variant="overline" sx={{fontSize: 8, color: "gold"}}>#Bagg.</Typography>
+      <Button variant="contained" sx={{ alignProperty: "center", ml: 2, mr: 2, display: "flex", flexDirection: "column"}}> 
+        <Typography variant="overline" sx={{fontSize: 8}}>#Bagg.</Typography>
         <Typography variant="h6">E1</Typography>
       </Button>
     )
@@ -30,12 +30,11 @@ const getBaggageOrRemarks = (flight) => {
 
 export default function FlightInDetailCard({ flight }) {
   return (
-    <div>
-      <Box sx={{felxGrow: 1}}>
-        <Card sx= {{ width: 1, p: 1, display: 'flex', flexDirection: 'row', alignItems: "center", justifyContent: "center"}}>
-          <Box sx={{ display: "inline-flex", flexDirection: "row" , alignItems: "center", justifyContent: "center"}}>
+      <Box sx={{display: 'flex', alignItems: "center", justifyContent: "center"}}>
+        <Card sx= {{ width: 0.75, p: 1, display: 'flex-inline', flexDirection: 'row', alignItems: "center", justifyContent: "center"}}>
+          <Box sx={{ display: "flex", flexDirection: "row" , alignItems: "center", justifyContent: "center"}}>
 
-          <Button variant="round" sx={{ bgcolor: "red", alignProperty: "center", color: "white", ml: 2, mr: 2, display: "flex", flexDirection: "column"}}> 
+          <Button variant="contained" sx={{ alignProperty: "center", ml: 2, mr: 2, display: "flex", flexDirection: "column"}}> 
                 <Typography variant="overline" sx={{fontSize: 8, color: "white"}}>#Gate</Typography>
                 <Typography variant="h6">A1</Typography>
           </Button>
@@ -64,6 +63,5 @@ export default function FlightInDetailCard({ flight }) {
           </Box>
         </Card>
       </Box>
-    </div>
   );
 }

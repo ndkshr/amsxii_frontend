@@ -15,14 +15,16 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function DashboardFlightScheduleCard({ heading }) {
+export default function DashboardFlightScheduleCard({ heading, selected, setSelected }) {
+  let key = heading.toLowerCase();
+  console.log("heading key", key);
   return (
     <React.Fragment>
       {/* <Title>{ heading }</Title> */}
       <Typography variant="h4" color="primary.main">{heading}</Typography>
       {getArrivalDepartureView(heading)}
       <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 1 }}>
-        <Button variant="contained"> View All </Button>
+        <Button variant="contained" onClick={(e) => setSelected({key})} selected={selected == key}> View All </Button>
       </Link>
     </React.Fragment>
   );
