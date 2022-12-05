@@ -8,13 +8,12 @@ import Box from '@mui/material/Box';
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar"
+import FlightInDetailCard from "./FlightInDetailCard";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import { alignProperty } from "@mui/material/styles/cssUtils";
-import FlightInDetailCard from "./FlightInDetailCard";
 import Select, { SelectChangeEvent } from '@mui/material/Select'
-
 
 class Arrival extends React.Component {
     constructor(props) {
@@ -57,7 +56,7 @@ class Arrival extends React.Component {
             this.setState({
                 items: json,
                 isLoaded: true,
-                screen: this.props.screen,
+                screen: this.state.screen,
                 terminal: "T1",
                 hours: timeSlot,
             })
@@ -100,7 +99,7 @@ class Arrival extends React.Component {
                             </Select>
                         </FormControl>
                     </Grid>
-                    <Stack sx={{p: 2}} spacing={2}>
+                    <Stack sx={{ p: 2}} spacing={2}>
                         {this.getItemsAfterFilter(screen, items).map((item, idx) => (
                             this.getCard(screen, item)
                         ))}
@@ -120,11 +119,11 @@ class Arrival extends React.Component {
     }
 
     getItemsAfterFilter(screen, items) {
-        let currentTerminal = this.props.terminal;
+        let currentTerminal = this.state.terminal;
+        
         if (screen === "dashboard") return (
             items.filter(item => item.arrival_departure === "arrival" && null !== item.terminal_gate_key && item.terminal_gate_key.includes(currentTerminal)).slice(0, 5)
         );
-        
         else  return (
             items.filter(item => item.arrival_departure === "arrival" && null !== item.terminal_gate_key && item.terminal_gate_key.includes(currentTerminal))
         );
